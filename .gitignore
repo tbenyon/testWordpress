@@ -1,1 +1,4 @@
 /.idea
+wp-content/uploads/*
+wp-content/themes/squarex-lite/images/
+wp-content/gallery/*

@@ -377,3 +377,27 @@ require( get_template_directory() . '/inc/contextual-help.php' );
  * Wellcom Screen
  */
 require_once( get_template_directory() . '/inc/welcome.php' );
+
+//Remove WordPress logo from the top left
+add_action( 'admin_bar_menu', 'remove_wp_logo', 999 );
+
+function remove_wp_logo( $wp_admin_bar ) {
+    $wp_admin_bar->remove_node( 'wp-logo' );
+}
+
+//Change welcome message to user
+add_filter('gettext', 'change_howdy', 10, 3);
+
+function change_howdy($translated, $text, $domain) {
+
+//    if (!is_admin() || 'default' != $domain)
+//        return $translated;
+
+    if (false !== strpos($translated, 'How are you'))
+        return str_replace('How are you', '\'Sup', $translated);
+
+    if (false !== strpos($translated, 'Howdy'))
+        return str_replace('Howdy', '\'Sup', $translated);
+
+    return $translated;
+}
